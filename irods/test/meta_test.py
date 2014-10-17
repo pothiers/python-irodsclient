@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #! /usr/bin/env python
 import unittest
 import os
@@ -6,7 +7,7 @@ from irods.meta import iRODSMeta
 from irods.models import (DataObject, Collection, Resource, User, DataObjectMeta, 
     CollectionMeta, ResourceMeta, UserMeta)
 from irods.session import iRODSSession
-import config
+from . import config
 
 
 

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from os import O_RDONLY, O_WRONLY, O_RDWR
 from io import RawIOBase, BufferedRandom
 

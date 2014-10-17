@@ -1,10 +1,11 @@
+from __future__ import absolute_import
 #! /usr/bin/env python2.6
 import unittest
 import os
 import sys
 from irods.models import User, Collection, Keywords, DataObject
 from irods.session import iRODSSession
-import config
+from . import config
 
 
 class TestQuery(unittest.TestCase):

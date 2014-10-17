@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+import six
 # if you're copying these from the docs, you might find the following regex helpful:
 # s/\(\w\+\)\s\+\(-\d\+\)/class \1(SystemException):\r    code = \2/g
 
@@ -31,8 +33,7 @@ class iRODSExceptionMeta(type):
         if 'code' in attrs:
             iRODSExceptionMeta.codes[attrs['code']] = self
 
-class iRODSException(Exception):
-    __metaclass__ = iRODSExceptionMeta
+class iRODSException(six.with_metaclass(iRODSExceptionMeta, Exception)):
     pass
 
 def get_exception_by_code(code):

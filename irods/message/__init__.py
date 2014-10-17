@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import struct
 import logging
 import socket
@@ -7,6 +8,7 @@ from irods.message.message import Message
 from irods.message.property import (BinaryProperty, StringProperty, 
     IntegerProperty, LongProperty, ArrayProperty, 
     SubmessageProperty)
+from six.moves import range
 
 logger = logging.getLogger(__name__)
 
@@ -105,8 +107,8 @@ class IntegerIntegerMap(Message):
         self.iiLen = 0
         if data:
             self.iiLen = len(data)
-            self.inx = data.keys()
-            self.ivalue = data.values()
+            self.inx = list(data.keys())
+            self.ivalue = list(data.values())
 
     iiLen = IntegerProperty()
     inx = ArrayProperty(IntegerProperty())
@@ -120,8 +122,8 @@ class IntegerStringMap(Message):
         self.isLen = 0
         if data:
             self.isLen = len(data)
-            self.inx = data.keys()
-            self.svalue = data.values()
+            self.inx = list(data.keys())
+            self.svalue = list(data.values())
 
     isLen = IntegerProperty()
     inx = ArrayProperty(IntegerProperty())
@@ -135,8 +137,8 @@ class StringStringMap(Message):
         self.ssLen = 0
         if data:
             self.ssLen = len(data)
-            self.keyWord = data.keys()
-            self.svalue = data.values()
+            self.keyWord = list(data.keys())
+            self.svalue = list(data.values())
 
     ssLen = IntegerProperty()
     keyWord = ArrayProperty(StringProperty())

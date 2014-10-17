@@ -1,9 +1,10 @@
+from __future__ import absolute_import
 #! /usr/bin/env python
 import os
 import sys
 import unittest
 from irods.session import iRODSSession
-import config
+from . import config
 
 
 class TestCollection(unittest.TestCase):

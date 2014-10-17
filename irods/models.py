@@ -1,17 +1,19 @@
+from __future__ import absolute_import
 from irods.column import Column, Integer, String, DateTime, Keyword
+import six
 
 class ModelBase(type):
     columns = {}
     def __new__(cls, name, bases, attr):
-        columns = [y for (x,y) in attr.iteritems() if isinstance(y, Column)]
+        columns = [y for (x,y) in six.iteritems(attr) if isinstance(y, Column)]
         for col in columns:
             ModelBase.columns[col.icat_id] = col
         attr['_columns'] = columns
         #attr['_icat_column_names'] = [y.icat_key for (x,y) in columns]
         return type.__new__(cls, name, bases, attr)
 
-class Model(object):
-    __metaclass__ = ModelBase
+class Model(six.with_metaclass(ModelBase, object)):
+    pass
 
 class Zone(Model):
     id = Column(Integer, 'ZONE_ID', 101)

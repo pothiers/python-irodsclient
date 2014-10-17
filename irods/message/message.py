@@ -1,8 +1,10 @@
+from __future__ import absolute_import
 # http://askawizard.blogspot.com/2008/10/ordered-properties-python-saga-part-5.html
 from struct import unpack, pack
 import xml.etree.ElementTree as ET
 
 from irods.message.ordered import OrderedProperty, OrderedMetaclass, OrderedClass
+import six
 
 class MessageMetaclass(OrderedMetaclass):
     def __init__(self, name, bases, attys):
@@ -10,9 +12,7 @@ class MessageMetaclass(OrderedMetaclass):
         for name, property in self._ordered_properties:
             property.dub(name)
 
-class Message(OrderedClass):
-    __metaclass__ = MessageMetaclass
-
+class Message(six.with_metaclass(MessageMetaclass, OrderedClass)):
     def __init__(self, *args, **kwargs):
         super(Message, self).__init__()
         self._values = {}

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from collections import OrderedDict
 
 from irods.models import Model
@@ -8,6 +9,7 @@ from irods.message import (IntegerIntegerMap, IntegerStringMap, StringStringMap,
 from irods.api_number import api_number
 from irods.exception import CAT_NO_ROWS_FOUND, MultipleResultsFound, NoResultFound
 from irods.results import ResultSet
+import six
 
 query_number = {
 	'ORDER_BY': 0x400,
@@ -79,7 +81,7 @@ class Query(object):
         return new_q
 
     def _select_message(self):
-        dct = OrderedDict([(column.icat_id, value) for (column, value) in self.columns.iteritems()])
+        dct = OrderedDict([(column.icat_id, value) for (column, value) in six.iteritems(self.columns)])
         return IntegerIntegerMap(dct)
 
     #todo store criterion for columns and criterion for keywords in seaparate lists
@@ -122,7 +124,7 @@ class Query(object):
                 results = result_message.get_main_message(GenQueryResponse)
                 result_set = ResultSet(results)
             except CAT_NO_ROWS_FOUND:
-                result_set = ResultSet(empty_gen_query_out(self.columns.keys())) 
+                result_set = ResultSet(empty_gen_query_out(list(self.columns.keys()))) 
         return result_set
         
     def all(self):

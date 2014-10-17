@@ -43,3 +43,6 @@ Session.vim
 
 # virtualenv
 testenv
+ 
+# Backups
+*.bak

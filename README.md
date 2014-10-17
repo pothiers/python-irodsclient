@@ -1,3 +1,6 @@
+**This was a quick attempt to allow pkg to work with python3 (as well as python 2).  Not there yet. The tests fail with obvious port issues.**
+
+
 python-irodsclient
 ============
 
